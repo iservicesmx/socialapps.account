@@ -1,0 +1,48 @@
+{% extends "base_clean.html" %}
+{% load i18n %}
+{% block extra_css%}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/buttons.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/facebox.css">
+{% endblock%}
+{% block extra_js %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/tooltip.js"></script>
+{% endblock %}
+
+{% block title %}{% trans 'Sign up' %}{% endblock %}
+
+{% block head %}{% endblock %}
+{% block content %}
+
+  {% if form.errors %}
+  <ul class="messages register">
+	  <li>{% trans 'Error while submitting form' %}</li>
+  </ul>
+  {% endif %}  
+<p class="login-switch register">{% trans 'Already an account?' %} <a href="/accounts/login/">{% trans 'Sign In' %}</a></p>
+	<div class="box register">
+	    <div id="logo"><img src="{{ STATIC_URL }}images/bg-logo.png" width="80%"></div>
+        <form action="" method="post">
+          {% csrf_token %}
+          <fieldset>
+            {% for field in form %}
+                {{ field.errors }}
+                {% comment %} Displaying checkboxes differently {% endcomment %}
+                {% if field.name == 'tos' %}
+                <p class="checkbox">
+                    <label for="id_{{ field.name }}">{{ field }} {{ field.label }}</label>
+                </p>
+                {% else %}
+                <p>
+                    {{ field.label_tag }} 
+                    {{ field }}
+                </p>
+                {% endif %}
+            {% endfor %}
+          </fieldset>
+          <p class="submit"><button type="submit" name="submit" value="{% trans "Sign up" %}" class="large button">Sign up</button></p>
+        </form>
+	                    
+	</div>
+{% endblock %}
+
+<!-- Las etiquetas de watermark están en el js de blufrog-->

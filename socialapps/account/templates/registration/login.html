@@ -1,0 +1,41 @@
+{% extends "base_clean.html" %}
+{% load i18n %}
+{% load facebook %}
+{% load twitter %}
+{% block extra_css%}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/buttons.css">
+{% endblock%}
+{% block extra_js %}
+<!--<script type="text/javascript" src="{{ STATIC_URL }}js/tooltip.js"></script>-->
+{% endblock %}
+{% block title %}Log in{% endblock %}
+{% block extra_script %}
+{% endblock %}	
+
+{% block body_class %}{{ block.super }} login_form {% endblock %}
+
+{% block content %}
+<p class="login-switch">{% trans 'Do not have an account?' %} <a href="/accounts/register/">{% trans 'Sign up' %}</a></p>
+
+<div class="box">
+  <div id="logo"><img src="{{ STATIC_URL }}images/bg-logo.png" width="80%"></div>
+  <form action="{% url django.contrib.auth.views.login %}" method="post" class="login_form">
+    {% csrf_token %}
+    <p><input type="text" name="identification" id="id_identification" class="tooltip" title="{% trans 'Enter your email' %}"></p>
+    <p><input type="password" name="password" id="id_password" class="tooltip" title="{% trans 'Enter your password' %}"></p>
+    <p class="submit"><button type="submit" name="submit" value="Login" class="button transition orange">Log in</button></p>
+
+    {% if next %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% endif %}
+  </form>
+  <div class="social-box">
+      <span style="float:left;">
+      {% facebook_button  '/static/images/facebook-login.png' %}
+      </span>
+      <span style="float:right;">
+      {% twitter_button '/static/images/twitter-login.png' %}
+      </span>
+  </div>
+</div>
+{% endblock %}

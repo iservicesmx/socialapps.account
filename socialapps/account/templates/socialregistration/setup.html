@@ -1,0 +1,37 @@
+{% extends "base_clean.html" %}
+{% load i18n %}
+{% block extra_css%}<link rel="stylesheet" href="{{ STATIC_URL }}css/buttons.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/facebox.css">{% endblock%}
+{% block extra_js %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/tooltip.js"></script>
+{% endblock %}
+
+{% block title %}{% trans 'Sign up' %}{% endblock %}
+
+{% block head %}{% endblock %}
+{% block content %}
+
+  {% if form.errors %}
+  <ul class="messages register">
+	  <li>{% trans 'Error while submitting form' %}</li>
+  </ul>
+  {% endif %}  
+<p class="login-switch register">{% trans 'Already an account?' %} <a href="/accounts/login/">{% trans 'Sign In' %}</a></p>
+<!--<p class="login-switch">{% trans 'Already an account?' %} <a href="/accounts/register/complete/" rel="[facebox]" rev="iframe|200">{% trans 'Sign In' %}</a></p>-->
+<ul class="messages-help">
+  <li>Welcome, to get an account need associate a email address</li>
+</ul>
+	<div class="box register">
+        <form action="" method="post">
+          {% csrf_token %}
+          <fieldset>
+
+              {{ form }}
+            
+          </fieldset>
+          <p class="submit"><button type="submit" name="submit" value="{% trans "Sign up" %}" class="large button">Sign up</button></p>
+        </form>
+       
+	</div>
+
+{% endblock %}

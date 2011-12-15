@@ -1,0 +1,27 @@
+{% extends "base_facebox.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Sign up complete' %}
+{% endblock %}
+{% block extra_css%}
+<META HTTP-EQUIV="Refresh" CONTENT="5; URL=/">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/facebox.css">
+{% endblock%}
+{% block head %}
+
+
+{% endblock %}
+
+{% block module-title %}<h2 class="module-title">{% trans 'Sign up complete' %}</h2>{% endblock %}
+
+{% block content %}
+<div class="box">
+<alert>
+<h2>{% trans 'Thank you!' %}</h2>
+<p>{% trans 'An email has been sent to you. You need to click the link to activate your account' %}.</p></alert>
+</div>
+<div id="redirect">
+    <img src="{{ STATIC_URL }}images/blufrog.jpg" width="200px" height="280px">
+    <div id="text">Bienvenido a Blufrog. En seguida serás redireccionado a la página de inicio, de no ser as&iacute; da click <a href = "/">aqu&iacute;</a></div>
+</div>
+{% endblock %}

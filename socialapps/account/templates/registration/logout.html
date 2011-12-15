@@ -1,0 +1,39 @@
+{% extends "base_clean.html" %}
+{% block extra_css%}<link rel="stylesheet" href="{{ STATIC_URL }}css/buttons.css">{% endblock%}
+{% block title %}Logged out{% endblock %}
+{% block extra_js %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/tooltip.js"></script>
+{% endblock %}
+{% block extra_script %}
+<script type="text/javascript">
+jQuery(function($){
+   $("#id_username_out").Watermark("Email or Username");
+   $("#id_password").Watermark("Password");
+});
+</script>
+{% endblock %}
+{% block body_class %}{{ block.super }} logout{% endblock %}
+
+{% block content %}
+<div class="messages">
+
+  <ul class="messages">
+	  <li class="success">You have been logged out.</li>
+  </ul>
+
+</div>
+
+<div class="box">
+    <div id="logo"><img src="{{ STATIC_URL }}images/bg-logo.png" width="80%"></div>
+    
+<!--  <h2>Logged out</h2>-->
+<!--  <div id="message-container">You have been logged out.</div>-->
+  <form action="{% url django.contrib.auth.views.login %}" method="post" class="login_form">{% csrf_token %}
+    <p><input type="text" name="identification" id="id_username_out" class="tooltip" title="Ingresa tu Username"></p>
+    <p><input type="password" name="password" id="id_password" class="tooltip" title="Ingresa tu Password"></p>
+    <p class="submit"><button type="submit" name="submit" value="Login" class="button transition orange">Log in</button></p>
+    <input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}/{% endif %}">
+  </form>
+  </div>
+{% endblock %}
+

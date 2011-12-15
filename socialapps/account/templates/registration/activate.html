@@ -1,0 +1,23 @@
+{% extends "base_facebox.html" %}
+
+{% block extra_css %} <META HTTP-EQUIV="Refresh" CONTENT="5; URL=/">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/facebox.css">
+{% endblock %}
+{% block title %}Account activation error{% endblock %}
+{% block body_class %}{{ block.super }} registration_activate{% endblock %}
+
+
+{% block content_title %}
+  <h2>Account activation error</h2>
+{% endblock %}
+
+
+{% block content %}
+<div class = "box">
+  <alert><p>The activation key <fail>"{{ activation_key }}" </fail>is invalid and cannot be used to activate this account.</alert></p>
+</div>
+<div id="redirect">
+    <img src="{{ STATIC_URL }}images/blufrog.jpg" width="200px" height="280px">
+    <div id="text">En seguida serás redireccionado a la página de inicio, de no ser as&iacute; da click <a href = "/">aqu&iacute;</a></div>
+</div>
+{% endblock %}
