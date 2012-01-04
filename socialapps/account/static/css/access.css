@@ -41,7 +41,7 @@ form.login_form, .box.register form {
 }
 
 .box form.login_form p input, .box.register form fieldset input {
-	font-size; 1.3em;
+	font-size: 1.3em;
 	width: 46.4%;
 	margin: 15px 0;
 }
@@ -187,3 +187,58 @@ ul.messages.register li {
 	font-size: 25px;
 }
 
+.register	{
+
+	padding-top: 5px;
+	margin-top: -0px !important;	 
+}
+
+.box.register {
+	top:20% !important;
+}
+.box fieldset {
+	padding: 10px 0px;
+	border: none;
+	margin: 0px;
+}
+
+.errors {
+	margin-left: 120px;
+	padding-left: 30px;
+	background: url(../images/exclamation-red-frame.png) no-repeat;
+}
+
+.errorlist {
+	color: red;
+	top: -100px;
+	display:none;
+}
+
+.box.register form fieldset ul.errorlist {
+	float: left;
+	position: relative;
+}
+
+
+.box alert p {
+	font-size: 20px;
+	font-weight: bold;
+	text-shadow: 0px 1px 0px rgba(0,0,0, .4);
+	text-align: center;
+}
+
+.box alert p fail {
+	color: red;
+}
+
+.box a {
+	color:black;
+}
+
+.box a:hover {
+	color:black;
+}
+
+.box alert h2 {
+	border: none;
+}
