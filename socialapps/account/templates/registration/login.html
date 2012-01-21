@@ -1,41 +1,57 @@
 {% extends "base_clean.html" %}
 {% load i18n %}
-{% load facebook %}
-{% load twitter %}
+
 {% block extra_css%}
-<link rel="stylesheet" href="{{ STATIC_URL }}css/buttons.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/access.css">
 {% endblock%}
-{% block extra_js %}
-<!--<script type="text/javascript" src="{{ STATIC_URL }}js/tooltip.js"></script>-->
-{% endblock %}
+
 {% block title %}Log in{% endblock %}
-{% block extra_script %}
-{% endblock %}	
 
 {% block body_class %}{{ block.super }} login_form {% endblock %}
 
 {% block content %}
-<p class="login-switch">{% trans 'Do not have an account?' %} <a href="/accounts/register/">{% trans 'Sign up' %}</a></p>
 
 <div class="box">
-  <div id="logo"><img src="{{ STATIC_URL }}images/bg-logo.png" width="80%"></div>
   <form action="{% url django.contrib.auth.views.login %}" method="post" class="login_form">
     {% csrf_token %}
-    <p><input type="text" name="identification" id="id_identification" class="tooltip" title="{% trans 'Enter your email' %}"></p>
-    <p><input type="password" name="password" id="id_password" class="tooltip" title="{% trans 'Enter your password' %}"></p>
-    <p class="submit"><button type="submit" name="submit" value="Login" class="button transition orange">Log in</button></p>
+    <p>
+        <input type="text" 
+                name="identification" 
+                id="id_identification" 
+                placeholder="{% trans 'Email address' %}"
+                title="{% trans 'Email address' %}"
+                rel="popover" 
+                data-placement="left"
+                data-content="{% trans 'you must provide the email address when you created the account.' %}">
+    </p>
+    <p>
+        <input type="password" 
+               name="password" 
+               id="id_password" 
+               placeholder="Password" 
+               title="{% trans 'You password' %}"
+               rel="popover" 
+               data-content="{% trans 'you must provide the password account. if you forget your password you can retrieve' %}">
+    </p>
+    <p class="submit"><button type="submit" name="submit" value="Login" class="btn large">Log in</button></p>
 
     {% if next %}
     <input type="hidden" name="next" value="{{ next }}">
     {% endif %}
   </form>
-  <div class="social-box">
-      <span style="float:left;">
-      {% facebook_button  '/static/images/facebook-login.png' %}
-      </span>
-      <span style="float:right;">
-      {% twitter_button '/static/images/twitter-login.png' %}
-      </span>
-  </div>
+    
 </div>
+{% endblock %}
+
+{% block extra_body %}
+<script type="text/javascript">
+$(function () {
+    $("input[rel=popover]")
+      .popover()
+      .click(function(e) {
+        e.preventDefault()
+      })
+      
+})
+</script>
 {% endblock %}

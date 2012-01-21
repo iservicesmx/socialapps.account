@@ -1,48 +1,54 @@
 {% extends "base_clean.html" %}
 {% load i18n %}
+
 {% block extra_css%}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/buttons.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/facebox.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/access.css">
 {% endblock%}
-{% block extra_js %}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/tooltip.js"></script>
-{% endblock %}
 
 {% block title %}{% trans 'Sign up' %}{% endblock %}
 
-{% block head %}{% endblock %}
 {% block content %}
 
   {% if form.errors %}
-  <ul class="messages register">
-	  <li>{% trans 'Error while submitting form' %}</li>
-  </ul>
+  <div class="alert-message fade in error">
+      <a class="close" data-dismiss="alert" href="#">&times;</a><p>{% trans 'Error while submitting form' %}</p>
+  </div>
   {% endif %}  
-<p class="login-switch register">{% trans 'Already an account?' %} <a href="/accounts/login/">{% trans 'Sign In' %}</a></p>
+  	
 	<div class="box register">
-	    <div id="logo"><img src="{{ STATIC_URL }}images/bg-logo.png" width="80%"></div>
         <form action="" method="post">
           {% csrf_token %}
           <fieldset>
-            {% for field in form %}
-                {{ field.errors }}
-                {% comment %} Displaying checkboxes differently {% endcomment %}
-                {% if field.name == 'tos' %}
-                <p class="checkbox">
-                    <label for="id_{{ field.name }}">{{ field }} {{ field.label }}</label>
-                </p>
-                {% else %}
-                <p>
-                    {{ field.label_tag }} 
-                    {{ field }}
-                </p>
-                {% endif %}
-            {% endfor %}
+              <p>
+                  <label for="id_email">{% trans 'Email' %}</label> 
+                  <input id="id_email" 
+                         type="text" 
+                         class="required" 
+                         name="email" 
+                         maxlength="75" 
+                         placeholder="{% trans 'Email' %}" />
+              </p>
+              <p>
+                  <label for="id_password1">{% trans 'Create password' %}</label> 
+                  <input id="id_password1" 
+                        type="password" 
+                        class="required" 
+                        name="password1" 
+                        placeholder="{% trans 'Create password' %}" />
+              </p>
+              <p>
+                  <label for="id_password2">{% trans 'Repeat password' %}</label> 
+                  <input id="id_password2" 
+                         type="password" 
+                         class="required" 
+                         name="password2" 
+                         placeholder="{% trans 'Repeat password' %}" />
+              </p>
           </fieldset>
-          <p class="submit"><button type="submit" name="submit" value="{% trans "Sign up" %}" class="large button">Sign up</button></p>
+          <button type="submit" name="submit" value="{% trans "Sign up" %}" class="btn large">Sign up</button>
         </form>
 	                    
 	</div>
+	
 {% endblock %}
 
-<!-- Las etiquetas de watermark están en el js de blufrog-->
